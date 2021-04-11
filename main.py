@@ -33,27 +33,50 @@ def get_results(num_results):
     #print(len(setlist_preview))
     #print(setlist_preview)
 
+    #artist_list = []
+    #tour_list = []
+    #venue_list = []
+    #city_list = []
+    #state_list = []
+    #month_list = []
+    #day_list = []
+    #year_list = []
     #loops through each show setlist on page
-    for set_list in setlist_preview:
+    for setlist in setlist_preview:
+
       #pulls out the date
-      date_block = set_list.find("div", "dateBlock")
+      date_block = setlist.find("div", "dateBlock")
       month = date_block.find("span", class_="month").text
+      #month_list.append(month)
       day = date_block.find("span", class_="day").text
+      #day_list.append(day)
       year = date_block.find("span", class_="year").text
+      #year_list.append(year)
+      #print(month_list)
+      #print(day_list)
+      #print(year_list)
 
       #pulls out the artist, venue, and location
-      title = set_list.find("h2")
-      title_text = title.find("a").text
-      #title_edit = title_text.split(",")
-      #artist = title_edit[0]
-      #artist_edit = artist.split(" at ")
-      #new_artist = artist_edit[0]
-      #venue = artist_edit[1]
-      #city = title_edit[1]
-      #country = title_edit[2]
+      details = setlist.find("div", "details").text
+
+      details = details.replace("\n", "")
+      details = details.split(",")
+      #print(details)
+
+      for detail in details:
+        detail = detail.strip()
+        print(detail)
+      print(f"{month} {day}, {year}")
+      print("\n")
+
+    #for artist, venue, city, month , day, year in zip(artist_list, venue_list, city_list, month_list, day_list, year_list):
+      #print(artist)
+      #print(f"Date: {month} {day}, {year}")
+      #print(venue)
+      #print(f"Location: {city}\n")
 
       #print(f"{new_artist} played {venue} in {city}, {country} on {month} {day}, {year}")
-      print(f"{title_text} played on {month} {day}, {year}")
+      #print(f"{title_text} played on {month} {day}, {year}")
 
 get_results(100)
 
